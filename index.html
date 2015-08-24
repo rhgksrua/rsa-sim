@@ -7,12 +7,27 @@
 <body>
     <h1>RSA Simulation</h1>
     <div class="container">
+        <div class="variables">
+            <ul>
+                <li>p (prime) = <span class='p'>?</span></li>
+                <li>q (prime) = <span class='q'>?</span></li>
+                <li>n = p * q = <span class='n'>?</span></li>
+            </ul>
+
+        </div>
         <div class="step-one">
             <h2>Multiply</h2>
             <p>Pick two prime numbers</p>
-            <input id="prime-one" type="text" name="">
-            <input id="prime-two" type="text" name="">
+            <form action="#">
+                <label for="prime-one">p</label>
+                <input id="prime-one" type="text" name="">
+                <label for="prime-two">q</label>
+                <input id="prime-two" type="text" name="">
+                <button>Multiply</button>
+            </form>
+            <p>p * q = <span class='n'>?</span>
         </div>
+        
     </div>
 </body>
 </html>
