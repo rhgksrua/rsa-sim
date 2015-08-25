@@ -33,7 +33,7 @@ function getPrimes(max) {
 
 function getCoPrimes(arr, num) {
     return arr.filter(function(el) {
-        return num % arr !== 0;
+        return num % el !== 0;
     });
     
 }
@@ -114,14 +114,23 @@ function clearErrors() {
     });
 }
 
-function updateValues() {
+function updateValues(updateClass) {
     // List of all classes that need to be updated
-    var elements = ['p', 'q', 'z', 'n'];
+    var classCollection,
+        elements;
+    if (updateClass) {
+        elements = [updateClass];
+    } else {
+        // Need to get some method of grabbing only available variables
+        elements = ['p', 'q', 'z', 'n'];
+    }
     elements.forEach(function(classes) {
-        var classCollection = document.getElementsByClassName(classes);
-        Array.prototype.forEach.call(classCollection, function(el) {
-            el.textContent = Rsa[classes];
-        });
+        classCollection = document.getElementsByClassName(classes);
+        if (classCollection.length > 0) {
+            Array.prototype.forEach.call(classCollection, function(el) {
+                el.textContent = Rsa[classes];
+            });
+        }
     });
 }
 
@@ -138,6 +147,8 @@ coPrimesButton.addEventListener('click', function(e) {
         e.preventDefault();
         if (e.target && e.target.nodeName === 'BUTTON') {
             console.log(e.target.textContent);
+            Rsa.k = +e.target.textContent;
+            updateValues('k');
         }
     });
 

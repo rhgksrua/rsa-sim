@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link type="stylesheet" href="/resources/css/main.css"></link>
+    <link rel="stylesheet" href="resources/css/main.css"></link>
     <title>RSA Simulation</title>
 </head>
     <body>
@@ -14,6 +14,7 @@
                     <li>q (prime) = <span class='q'>?</span></li>
                     <li>n = p * q = <span class='n'>?</span></li>
                     <li>z = (p - 1) * (q - 1) = <span class='z'>?</span></li>
+                    <li>k = <span class='k'>?</span></li>
                 </ul>
 
             </div>
@@ -47,9 +48,15 @@
                 
             </div>
             <div class="step-four">
-                <h2>Find k</h2>
-                <p>k 
+                <h2>Server Public Keys</h2>
+                <p>n = <span class="n">?</span></p> 
+                <p>k = <span class="k">?</span></p> 
                 
+            </div>
+            <div class="step-five">
+                <h2>Server needs to generate private key</h2>
+                <p>k * j = 1 mod z</p>
+                <p><span class="k">?</span> * <span class="j">?</span> = 1 mod <span class="z">?</span></p>
             </div>
             
         </div>
