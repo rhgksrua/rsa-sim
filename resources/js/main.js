@@ -23,29 +23,30 @@ var Rsa = {
                 return;
             }
         }
-    }
-};
+    },
+    generatePublicKey: function() {
 
-function getPrimes(max) {
-    var sieve = [], i, j, primes = [];
-    for (i = 2; i <= max; ++i) {
-        if (!sieve[i]) {
-            primes.push(i);
-            for (j = i << 1; j <= max; j += i) {
-                sieve[j] = true;
+    },
+    getPrimes: function(max) {
+        var sieve = [], i, j, primes = [];
+        for (i = 2; i <= max; ++i) {
+            if (!sieve[i]) {
+                primes.push(i);
+                for (j = i << 1; j <= max; j += i) {
+                    sieve[j] = true;
+                }
             }
         }
-    }
-    //console.log(primes);
-    return primes;
-}
+        return primes;
 
-function getCoPrimes(arr, num) {
-    return arr.filter(function(el) {
-        return num % el !== 0;
-    });
-    
-}
+    },
+    getCoPrimes: function(num) {
+        var arr = this.getPrimes(this.z);
+        return arr.filter(function(el) {
+            return num % el !== 0;
+        });
+    }
+};
 
 /**
  * 
@@ -80,9 +81,55 @@ var Validator = {
     }
 };
 
-// EventListeners
-var primeSubmit = document.getElementById('prime-submit');
+/**
+ * updateValues
+ * 
+ * Updates all the variables on screen
+ *
+ * @param {string} name of class to update
+ * @return {undefined}
+ *
+ */
+function updateValues(updateClass) {
+    // List of all classes that need to be updated
+    var classCollection,
+        elements;
+    if (updateClass) {
+        elements = [updateClass];
+    } else {
+        // Need to get some method of grabbing only available variables
+        elements = ['p', 'q', 'z', 'n'];
+    }
+    elements.forEach(function(classes) {
+        classCollection = document.getElementsByClassName(classes);
+        if (classCollection.length > 0) {
+            Array.prototype.forEach.call(classCollection, function(el) {
+                el.textContent = Rsa[classes];
+            });
+        }
+    });
+}
 
+/**
+ * clearErrors
+ *
+ * Clears all the error messages
+ *
+ * @return {undefined}
+ */
+function clearErrors() {
+    var errors = document.getElementsByClassName('error');
+    Array.prototype.forEach.call(errors, function(el) {
+        el.textContent = "";
+    });
+}
+
+/**
+ *
+ * Validate and store p and q
+ *
+ **/
+var primeSubmit = document.getElementById('prime-submit');
 primeSubmit.addEventListener('click', addPrimes);
 
 function addPrimes(e) {
@@ -116,39 +163,16 @@ function addPrimes(e) {
     document.getElementById('n').textContent = Rsa.n;
 }
 
-function clearErrors() {
-    var errors = document.getElementsByClassName('error');
-    Array.prototype.forEach.call(errors, function(el) {
-        el.textContent = "";
-    });
-}
-
-function updateValues(updateClass) {
-    // List of all classes that need to be updated
-    var classCollection,
-        elements;
-    if (updateClass) {
-        elements = [updateClass];
-    } else {
-        // Need to get some method of grabbing only available variables
-        elements = ['p', 'q', 'z', 'n'];
-    }
-    elements.forEach(function(classes) {
-        classCollection = document.getElementsByClassName(classes);
-        if (classCollection.length > 0) {
-            Array.prototype.forEach.call(classCollection, function(el) {
-                el.textContent = Rsa[classes];
-            });
-        }
-    });
-}
-
-// NEED TO MOVE THIS INTO Rsa
+/**
+ *
+ * Get co-primes and add buttons
+ *
+ **/
 var coPrimesButton = document.getElementById('coprimes');
 coPrimesButton.addEventListener('click', function(e) {
     e.preventDefault();
     var prime;
-    var coPrimes = getCoPrimes(getPrimes(Rsa.z), Rsa.z);
+    var coPrimes = Rsa.getCoPrimes();
     var coPrimesList = document.createElement('ul');
     coPrimesList.setAttribute('id', 'coprimes-buttons');
 
@@ -156,13 +180,12 @@ coPrimesButton.addEventListener('click', function(e) {
     coPrimesList.addEventListener('click', function(e) {
         e.preventDefault();
         if (e.target && e.target.nodeName === 'BUTTON') {
-            //console.log(e.target.textContent);
             Rsa.k = +e.target.textContent;
             updateValues('k');
         }
     });
 
-
+    // Adding primes buttons
     coPrimes.forEach(function(el) {
         prime = document.createElement('li');
         btn = document.createElement('button');
@@ -176,9 +199,15 @@ coPrimesButton.addEventListener('click', function(e) {
     document.getElementById('coprimes-list').appendChild(coPrimesList);
 });
 
+/**
+ *
+ * Generate and display secret key
+ *
+ **/
 var secretBtn = document.getElementById('secret-key');
 secretBtn.addEventListener('click', function(e) {
     e.preventDefault();
     Rsa.generateSecretKey();
     console.log(Rsa.j);
+    updateValues('j');
 });

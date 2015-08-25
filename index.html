@@ -12,9 +12,10 @@
                 <ul>
                     <li>p (prime) = <span class='p'>?</span></li>
                     <li>q (prime) = <span class='q'>?</span></li>
-                    <li>n = p * q = <span class='n'>?</span></li>
+                    <li>n = p * q = <span class='n'>?</span> (Public Key)</li>
                     <li>z = (p - 1) * (q - 1) = <span class='z'>?</span></li>
-                    <li>k = <span class='k'>?</span></li>
+                    <li>k = <span class='k'>?</span> (Public Key)</li>
+                    <li>j = <span class='j'>?</span> (Secret Key)</li>
                 </ul>
 
             </div>
@@ -60,10 +61,14 @@
                 <p><span class="k">?</span> * <span class="j">j</span> / <span class="z">?</span> = ? with remainder 1</p>
                 <p>We need a j such that the remainder is 1</p>
                 <button id='secret-key'>Generate secret key</button>
-
-
+                <p>Your Secret Key(j) is <span class='j'>?</span></p>
+                <p>Your Public Key(n) is <span class='n'>?</span></p>
+                <p>Your Public Key(k) is <span class='k'>?</span></p>
             </div>
             
+            <div class="step-six">
+                <h2>Encrypting Message</h2>
+            </div>
         </div>
         <script src='resources/js/main.js'></script>
     </body>
