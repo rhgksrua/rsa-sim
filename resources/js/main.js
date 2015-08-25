@@ -14,6 +14,15 @@ var Rsa = {
         this.q = q;
         this.n = p * q;
         this.z = (p - 1) * (q - 1);
+    },
+    generateSecretKey: function() {
+        for (var i = 0; i < 1000; i++) {
+            var secret = (this.k * i) % 20; 
+            if (secret === 1) {
+                this.j = i;
+                return;
+            }
+        }
     }
 };
 
@@ -27,7 +36,7 @@ function getPrimes(max) {
             }
         }
     }
-    console.log(primes);
+    //console.log(primes);
     return primes;
 }
 
@@ -134,6 +143,7 @@ function updateValues(updateClass) {
     });
 }
 
+// NEED TO MOVE THIS INTO Rsa
 var coPrimesButton = document.getElementById('coprimes');
 coPrimesButton.addEventListener('click', function(e) {
     e.preventDefault();
@@ -146,7 +156,7 @@ coPrimesButton.addEventListener('click', function(e) {
     coPrimesList.addEventListener('click', function(e) {
         e.preventDefault();
         if (e.target && e.target.nodeName === 'BUTTON') {
-            console.log(e.target.textContent);
+            //console.log(e.target.textContent);
             Rsa.k = +e.target.textContent;
             updateValues('k');
         }
@@ -164,5 +174,11 @@ coPrimesButton.addEventListener('click', function(e) {
     var coPrimesParent = document.getElementById('coprimes-list');
     document.getElementById('coprimes-instruction').setAttribute('class', '');
     document.getElementById('coprimes-list').appendChild(coPrimesList);
+});
 
+var secretBtn = document.getElementById('secret-key');
+secretBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    Rsa.generateSecretKey();
+    console.log(Rsa.j);
 });
