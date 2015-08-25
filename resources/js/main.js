@@ -27,8 +27,17 @@ function getPrimes(max) {
             }
         }
     }
+    console.log(primes);
     return primes;
 }
+
+function getCoPrimes(arr, num) {
+    return arr.filter(function(el) {
+        return num % arr !== 0;
+    });
+    
+}
+
 /**
  * 
  * Validate inputs
@@ -115,3 +124,34 @@ function updateValues() {
         });
     });
 }
+
+var coPrimesButton = document.getElementById('coprimes');
+coPrimesButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    var prime;
+    var coPrimes = getCoPrimes(getPrimes(Rsa.z), Rsa.z);
+    var coPrimesList = document.createElement('ul');
+    coPrimesList.setAttribute('id', 'coprimes-buttons');
+
+    // Event delegation for coprime buttons
+    coPrimesList.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (e.target && e.target.nodeName === 'BUTTON') {
+            console.log(e.target.textContent);
+        }
+    });
+
+
+    coPrimes.forEach(function(el) {
+        prime = document.createElement('li');
+        btn = document.createElement('button');
+        btn.setAttribute('id', 'primes-' + el);
+        btn.textContent = el;
+        prime.appendChild(btn);
+        coPrimesList.appendChild(prime);
+    });
+    var coPrimesParent = document.getElementById('coprimes-list');
+
+    document.getElementById('coprimes-list').appendChild(coPrimesList);
+
+});
