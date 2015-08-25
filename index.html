@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link type="stylesheet" href="/resources/css/main.css"></link>
     <title>RSA Simulation</title>
 </head>
     <body>
@@ -34,15 +35,15 @@
                 <h2>Find z</h2>
                 <p>z = (p - 1) * (q - 1)</p>
                 <p>z = (<span class='p'>?</span> - 1) * (<span class='q'>?</span> - 1) = <span class='z' id='z'>?</span></p>
-                
-                
             </div>
             <div class="step-three">
                 <h2>Find k</h2>
                 <p>k is co-prime to z (z is not divisible by k)</p>
                 <button id="coprimes">Generate co-primes</button>
                 <p> Need to generate a list of prime numbers less than z = <span class='z'>?</span></p>
-                <div id="coprimes-list"></div>
+                <div id="coprimes-list">
+                    <p id="coprimes-instruction" class="hidden">Choose a coprime</p>
+                </div>
                 
             </div>
             <div class="step-four">

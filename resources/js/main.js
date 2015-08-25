@@ -151,7 +151,7 @@ coPrimesButton.addEventListener('click', function(e) {
         coPrimesList.appendChild(prime);
     });
     var coPrimesParent = document.getElementById('coprimes-list');
-
+    document.getElementById('coprimes-instruction').setAttribute('class', '');
     document.getElementById('coprimes-list').appendChild(coPrimesList);
 
 });
