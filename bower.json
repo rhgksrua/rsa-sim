@@ -1,0 +1,19 @@
+{
+  "name": "rsasim",
+  "version": "0.0.1",
+  "homepage": "https://github.com/rhgksrua/rsa-sim",
+  "authors": [
+    "Han Koh <rhgksrua@gmail.com>"
+  ],
+  "keywords": [
+    "rsa"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

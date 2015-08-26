@@ -44,6 +44,16 @@ var Rsa = {
         return arr.filter(function(el) {
             return num % el !== 0;
         });
+    },
+    encryptMessage: function(message) {
+        console.log(this.messageToNumber(message));
+    },
+    messageToNumber: function(message) {
+        var converted = '';
+        for (var i = 0, len = message.length; i < len; i++) {
+            converted += message[i].charCodeAt(0).toString();
+        }
+        return +converted;
     }
 };
 
@@ -210,4 +220,17 @@ secretBtn.addEventListener('click', function(e) {
     updateValues('j');
 });
 
+/**
+ *
+ * Generate encrypted message
+ *
+ **/
+var encryptBtn = document.getElementById('encryptBtn');
+encryptBtn.addEventListener('click', function(e) {
+    var message;
+    e.preventDefault();
+    message = document.getElementById('P').value;
+    console.log(message);
+    Rsa.encryptMessage(message);
 
+});
