@@ -1,6 +1,5 @@
 // main.js
 
-
 /**
  * 
  * RSA
@@ -208,6 +207,7 @@ var secretBtn = document.getElementById('secret-key');
 secretBtn.addEventListener('click', function(e) {
     e.preventDefault();
     Rsa.generateSecretKey();
-    console.log(Rsa.j);
     updateValues('j');
 });
+
+
